@@ -19,7 +19,7 @@ import './globalStyles/map.css'
 
 export const metadata: Metadata = {
   title: 'Rostelecom',
-  description: 'Проект Алима 0_0',
+  description: 'Rostelecom магазин одежды, аксесуаров, концелярии и сувениров',
 }
 
 export const viewport: Viewport = {

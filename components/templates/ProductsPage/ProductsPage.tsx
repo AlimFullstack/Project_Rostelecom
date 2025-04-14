@@ -146,6 +146,8 @@ const ProductsPage = ({ searchParams, pageName }: IProductsPage) => {
     }
   }, [lang])
 
+  console.log(products)
+
   return (
     <>
       <HeadingWithCount
