@@ -2,6 +2,9 @@ import axios from 'axios'
 import { NextResponse } from 'next/server'
 import clientPromise from '@/lib/mongodb'
 import { getAuthRouteData } from '@/lib/utils/api-routes'
+import { getPaymentReturnUrl, getYooKassaAuth } from '@/lib/yookassa'
+
+export const dynamic = 'force-dynamic'
 
 export async function POST(req: Request) {
   try {
@@ -21,10 +24,7 @@ export async function POST(req: Request) {
         'Content-Type': 'application/json',
         'Idempotence-Key': Date.now(),
       },
-      auth: {
-        username: '284434',
-        password: 'test_qDOAK1qBsglEy7Pbf2ZkSq7-uWERPH-LNAwPyPNS8hc',
-      },
+      auth: getYooKassaAuth(),
       data: {
         amount: {
           value: reqBody.amount,
@@ -32,7 +32,7 @@ export async function POST(req: Request) {
         },
         confirmation: {
           type: 'redirect',
-          return_url: 'https://rostelecom-shop.vercel.app/payment-success',
+          return_url: getPaymentReturnUrl(),
         },
         capture: true,
         description: reqBody.description,

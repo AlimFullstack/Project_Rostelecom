@@ -1,10 +1,12 @@
 import { MongoClient } from 'mongodb'
 
-const clientPromise = MongoClient.connect(
-  process.env.NEXT_PUBLIC_DB_URL as string,
-  {
-    maxPoolSize: 10,
-  }
-)
+const uri =
+  process.env.MONGODB_URI ??
+  process.env.NEXT_PUBLIC_DB_URL ??
+  'mongodb://localhost:27017'
+
+const clientPromise = MongoClient.connect(uri, {
+  maxPoolSize: 10,
+})
 
 export default clientPromise

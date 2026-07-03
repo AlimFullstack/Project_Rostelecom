@@ -1,5 +1,8 @@
 import axios from 'axios'
 import { NextResponse } from 'next/server'
+import { getYooKassaAuth } from '@/lib/yookassa'
+
+export const dynamic = 'force-dynamic'
 
 export async function POST(req: Request) {
   try {
@@ -8,10 +11,7 @@ export async function POST(req: Request) {
     const { data } = await axios({
       method: 'get',
       url: `https://api.yookassa.ru/v3/payments/${reqBody.paymentId}`,
-      auth: {
-        username: '284434',
-        password: 'test_qDOAK1qBsglEy7Pbf2ZkSq7-uWERPH-LNAwPyPNS8hc',
-      },
+      auth: getYooKassaAuth(),
     })
 
     return NextResponse.json({ result: data })
